@@ -1,0 +1,3 @@
+rootProject.name = 'sonmApp'
+
+include ':app'
