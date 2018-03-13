@@ -1,6 +1,6 @@
 export const Variable = {
     Default: {
-        themeColor: '#f7331d',
+        themeColor: '#ef6b0a',
         hdtxt: '#fff',
     },
     df: {

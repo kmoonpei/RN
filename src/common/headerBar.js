@@ -12,7 +12,7 @@ export default function HeaderBar(screenProps = {}, params = {}, navigation = {}
         headerRight: params.header_right,
         headerLeft: params.header_left,
         headerTitleStyle: {
-            color: theme.hdtxt
+            color: theme.hdtxt,
         },
         headerStyle: {
             backgroundColor: theme.themeColor,

@@ -1,7 +1,7 @@
 'use strict'
 import * as Types from '../ActionTypes/action.types';
 
-export function singType(kind, data) {
+export function signType(kind, data) {
     let kinds = kind.toUpperCase();
     switch (kinds) {
         case 'INIT':
@@ -10,11 +10,12 @@ export function singType(kind, data) {
             });
         case 'TAB':
             return ({
-                type: Types.APP_STATE.TAB
+                type: Types.APP_STATE.TAB,
+                data: data
             });
         case 'EXIT':
             return ({
                 type: Types.APP_STATE.EXIT
-            });
+            })
     }
 }

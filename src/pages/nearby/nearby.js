@@ -27,7 +27,7 @@ class NearbyScreen extends Component {
 
     render() {
         return (
-            <View>
+            <View style={{flex:1,backgroundColor:'#0a0'}}>
                 <Text> 附近 </Text>
             </View >
         )

@@ -1,4 +1,4 @@
 import { AppRegistry } from 'react-native';
-import Router from './src/app/app';
+import Root from './src/app/app';
 
-AppRegistry.registerComponent('sonmApp', () => Router);
+AppRegistry.registerComponent('sonmApp', () => Root);

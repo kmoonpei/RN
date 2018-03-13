@@ -30,7 +30,7 @@ class PublishScreen extends Component {
 
     render() {
         return ( 
-            <View> 
+            <View style={{flex:1,backgroundColor:'#56f'}}> 
                 <Text> 发布 </Text>
             </View >
         )
