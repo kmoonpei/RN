@@ -53,6 +53,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     btn: {
-        backgroundColor: '#f00',
+        
     }
 })

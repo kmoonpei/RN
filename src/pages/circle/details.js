@@ -33,7 +33,8 @@ class DetailsScreen extends Component {
                 <Text>count：{this.state.count}</Text>
                 <Button
                     onPress={() => this.props.navigation.goBack()}
-                    title='返回' />
+                    title='返回'
+                    color='#ab3' />
             </View>
         )
     }

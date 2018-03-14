@@ -8,6 +8,7 @@ import NearbyScreen from '../pages/nearby/nearby'
 import MeScreen from '../pages/me/me';
 import DetailsScreen from '../pages/circle/details';
 
+
 const Tabs = TabNavigator({
     circle: { screen: CircleScreen },
     publish: { screen: PublishScreen },
@@ -52,3 +53,4 @@ export const AppNavigator = StackNavigator({
         headerMode: 'screen',
     }
 );
+
