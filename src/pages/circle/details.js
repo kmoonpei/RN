@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
-import { View, Text, Button, Image, StyleSheet } from 'react-native'
+import {
+    View, Text, Button, Image, StyleSheet,
+
+} from 'react-native'
 import { connect } from 'react-redux'
 import HeaderBar from '../../common/headerBar'
-
+import { Variable } from '../../variables'
 class DetailsScreen extends Component {
     static navigationOptions = ({ navigation, screenProps }) => {
         const params = navigation.state.params || {};
@@ -17,7 +20,7 @@ class DetailsScreen extends Component {
         this.state = {
             count: 3,
         }
-
+        this.theme = Variable.Default;
     }
 
     componentWillMount() {

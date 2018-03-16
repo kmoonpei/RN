@@ -2,12 +2,12 @@ import React, {
     Component
 } from 'react'
 import {
-    View, Text, Button,
+    View, Text, Button, StatusBar,
     StyleSheet
 } from 'react-native'
 import { connect } from 'react-redux'
 import HeaderBar from '../../common/headerBar'
-
+import { Variable } from '../../variables'
 class CircleScreen extends Component {
     static params = {
         Image: require('../../assets/tabs/circle.png'),
@@ -21,12 +21,15 @@ class CircleScreen extends Component {
 
         };
         this.pnv = this.props.navigation;
-
+        this.theme = Variable.Default;
     }
 
     render() {
         return (
             <View style={styles.bg}>
+                <StatusBar
+                    barStyle='light-content'
+                    backgroundColor={this.theme.themeColor} />
                 <Text> 圈子 </Text>
                 <Button
                     style={styles.btn}
@@ -53,6 +56,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     btn: {
-        
+
     }
 })

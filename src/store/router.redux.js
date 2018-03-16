@@ -17,7 +17,7 @@ if (__DEV__) {
 }
 
 const todoStore = combineReducers({
-    navReducer,
+    nav: navReducer,
     appState,
     netInfo,
 });

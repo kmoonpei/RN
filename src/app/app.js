@@ -51,10 +51,11 @@ class App extends Component {
 
 
     render() {
+        const { dispatch, nav } = this.props;
         return (
             <AppNavigator navigation={addNavigationHelpers({
-                dispatch: this.props.dispatch,
-                state: this.props.nav,
+                dispatch,
+                state: nav,
                 addListener,
             })} />
         );
@@ -63,7 +64,7 @@ class App extends Component {
 
 mapStateToProps = (store) => ({
     apps: store.appState.status,
-    nav: store.navReducer,
+    nav: store.nav,
 });
 
 const AppComponent = connect(mapStateToProps)(App);
