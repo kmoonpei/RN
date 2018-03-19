@@ -2,6 +2,7 @@ import {
     StackNavigator,
     TabNavigator,
 } from 'react-navigation';
+import LoginScreen from '../pages/login/login'
 import CircleScreen from '../pages/circle/circle'
 import PublishScreen from '../pages/publish/publish';
 import NearbyScreen from '../pages/nearby/nearby'
@@ -40,6 +41,7 @@ const Tabs = TabNavigator({
     })
 export const AppNavigator = StackNavigator({
     Tab: { screen: Tabs },
+    login: { screen: LoginScreen },
     details: { screen: DetailsScreen },
 }, {
         navigationOptions: { // 屏幕导航的默认选项, 也可以在组件内用 static navigationOptions 设置(会覆盖此处的设置)

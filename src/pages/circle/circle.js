@@ -40,7 +40,7 @@ class CircleScreen extends Component {
     }
 
     _goToDetails = () => {
-        this.pnv.navigate('details');
+        this.pnv.navigate('login');
     }
 }
 

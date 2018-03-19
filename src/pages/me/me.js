@@ -27,7 +27,7 @@ class MeScreen extends Component {
 
     render() {
         return (
-            <View style={{flex:1,backgroundColor:'#f00'}}>
+            <View style={{flex:1}}>
                 <Text> 个人 </Text>
             </View >
         )
