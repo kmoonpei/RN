@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import HeaderBar from '../../common/headerBar'
 import { Variable } from '../../variables'
 import DeviceRn from '../../components/Tools/device'
+import Tools from '../../components/Tools/tools'
 
 let DevWH = DeviceRn().getWidHig();
 
@@ -49,7 +50,7 @@ class LoginScreen extends Component {
                         onChangeText={(text) => this.setState({ pwd: parseInt(text) })}
                     />
                 </View>
-                <TouchableOpacity onPress={this._onPressButton}>
+                <TouchableOpacity onPress={this._onFindpwd}>
                     <View style={styles.txt_forget_wrap}>
                         <Text style={styles.txt_forget_pwd}>忘记密码?</Text>
                     </View>
@@ -59,7 +60,7 @@ class LoginScreen extends Component {
                         <Text style={styles.txt_login}>登录</Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={this._onPressButton}>
+                <TouchableOpacity onPress={this._onRegister}>
                     <View style={styles.login}>
                         <Text >没有账号?马上注册</Text>
                     </View>
@@ -71,6 +72,12 @@ class LoginScreen extends Component {
     _onLogin = () => {
         this.pnv.navigate('details');
     }
+    _onFindpwd = () => {
+        this.pnv.navigate('findpwd');
+    }
+    _onRegister = () => {
+        this.pnv.navigate('register');
+    }
 }
 mapStoreState = (store) => ({
 
@@ -79,6 +86,7 @@ export default connect(mapStoreState)(LoginScreen);
 
 const styles = StyleSheet.create({
     bg: {
+        flex: 1,
         alignItems: 'center',
     },
     bg_img: {
@@ -101,7 +109,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     left_icon: {
-        width: 16.8,
+        width: 22,
         height: 22,
         marginRight: 20,
     },
@@ -109,7 +117,6 @@ const styles = StyleSheet.create({
         width: 250,
         height: 30,
         padding: 0,
-
     },
     txt_forget_wrap: {
         width: 250,
@@ -128,10 +135,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     txt_login: {
-        fontSize: 16,
+        fontSize: 16 / Tools.Font(),
         color: '#fff',
     },
-    register: {
-
-    },
+    
 })
