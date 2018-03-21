@@ -11,7 +11,7 @@ import DeviceRn from '../../components/Tools/device'
 import Tools from '../../components/Tools/tools'
 
 let DevWH = DeviceRn().getWidHig();
-const options = ['取消', '业主', '设计工作室', '装修公司', '施工队', '材料商'];
+const options = ['业主', '设计工作室', '装修公司', '施工队', '材料商'];
 const CANCEL_INDEX = 0;
 class RegisterScreen extends Component {
     static pars = {
@@ -24,8 +24,10 @@ class RegisterScreen extends Component {
             phone: '',
             pwd: '',
             type: '',
-            isChecked: true,
-            modalVisible: false,
+            isChecked: false,
+            modalVisible_protocol: false,
+            modalVisible_types: false,
+
         };
         this.pnv = this.props.navigation;
     }
@@ -72,13 +74,12 @@ class RegisterScreen extends Component {
 
                 <View style={styles.txt_input_wrap}>
                     <Image style={styles.left_icon} source={require('../../assets/login/identity.png')} />
-                    <TouchableOpacity style={{ flex: 1 }} onPress={this._onSelectID}>
+                    <TouchableOpacity style={{ flex: 1 }} onPress={this._openTypes}>
                         <View style={styles.selected}>
                             <Text style={{ color: this.state.type != '' ? '#222' : '#aaa' }}>{this.state.type != '' ? this.state.type : '请选择您的身份'}</Text>
                             <Image style={styles.arrow_icon} source={require('../../assets/login/arrows.png')} />
                         </View>
                     </TouchableOpacity>
-
                 </View>
                 <View style={styles.xieyi}>
                     <TouchableOpacity onPress={this._onAgree} >
@@ -88,72 +89,81 @@ class RegisterScreen extends Component {
                         <Text style={[{ color: this.state.isChecked ? Variable.Default.themeColor : '#aaa' }]}>我已同意装甲兵注册协议</Text>
                     </TouchableOpacity>
                 </View>
-                <TouchableOpacity onPress={this._onRegister} disabled={this.state.isChecked && this.state.type != '' ? false : true}>
-                    <View style={[styles.register, { backgroundColor: this.state.isChecked && this.state.type != '' ? Variable.Default.themeColor : '#aaa' }]}>
-                        <Text style={styles.txt_register}>注册</Text>
-                    </View>
+                <TouchableOpacity style={[styles.register, { backgroundColor: this.state.isChecked && this.state.type != '' ? Variable.Default.themeColor : '#aaa' }]}
+                    onPress={this._onRegister}
+                    disabled={this.state.isChecked && this.state.type != '' ? false : true}>
+                    <Text style={styles.txt_register}>注册</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={this._onToLogin}>
-                    <View style={styles.login}>
-                        <Text >已有账号?马上登录</Text>
-                    </View>
+                <TouchableOpacity style={styles.login} onPress={this._onToLogin}>
+                    <Text >已有账号?马上登录</Text>
                 </TouchableOpacity>
-                {this._actionSheet()}
-                {this._mode()}
+                {this._modalTypes()}
+                {this._modalProtocol()}
             </View>
         )
     }
 
-    _actionSheet() {
-        return (
-            <View>
-                <ActionSheet
-                    ref={o => this.ActionSheet = o}
-                    options={options}
-                    cancelButtonIndex={CANCEL_INDEX}
-                    onPress={this._handlePress.bind(this)}
-                />
-            </View>
-        )
-    }
-    _handlePress(item) {
-        switch (item) {
-            case 1: this.setState({ type: '业主' }); break;
-            case 2: this.setState({ type: '设计工作室' }); break;
-            case 3: this.setState({ type: '装修公司' }); break;
-            case 4: this.setState({ type: '施工队' }); break;
-            case 5: this.setState({ type: '材料商' }); break;
-        }
-    }
-    _mode() {
+    _modalTypes() {
         return (
             <Modal
-                // style={{ backgroundColor: '#222',alignItems:'center',justifyContent:'center'}}
                 animationType={"fade"}
                 transparent={true}
-                visible={this.state.modalVisible}
+                visible={this.state.modalVisible_types}
                 onRequestClose={() => { alert("Modal has been closed.") }}
             >
-                <View style={styles.modal_wrap}>
-                    <Image style={styles.modal_close} source={require('../../assets/login/close.png')} />
-                    <View style={styles.modal_content}>
-                        <Text style={{ color: '#f00' }}>《装甲兵用户协议》</Text>
-                        <TouchableHighlight style={styles.modal_sure_wrap} onPress={() => {
-                            this.setModalVisible(false)
-                        }}>
-                            <View style={[styles.modal_sure_btn, { backgroundColor: Variable.Default.themeColor }]}>
-                                <Text style={{ color: '#fff' }}>确定</Text>
+                <View style={styles.types_wrap}>
+                    <View style={styles.types_box}>
+                        <View style={styles.types_title_wrap}>
+                            <View style={styles.types_title}>
+                                <Text style={styles.types_title_txt}>请选择您的身份</Text>
                             </View>
-                        </TouchableHighlight>
-
+                            <TouchableOpacity style={styles.type_sure} onPress={() => {
+                                this.setModalVisible_types(false)
+                            }}>
+                                <Text style={styles.type_sure_txt} >确定</Text>
+                            </TouchableOpacity>
+                        </View>
+                        {options.map((item, i) => {
+                            return <TouchableOpacity key={i} style={styles.types_options} onPress={() => this.setState({ type: item })}>
+                                <Text style={{ fontSize: this.state.type == item ? 16 / Tools.Font() : 14 / Tools.Font(), color: this.state.type == item ? '#222' : '#aaa' }} >{item}</Text>
+                            </TouchableOpacity>
+                        })}
                     </View>
                 </View>
             </Modal>
         )
     }
-    setModalVisible(visible) {
-        this.setState({ modalVisible: visible });
+
+    _modalProtocol() {
+        return (
+            <Modal
+                animationType={"fade"}
+                transparent={true}
+                visible={this.state.modalVisible_protocol}
+                onRequestClose={() => { alert("Modal has been closed.") }}
+            >
+                <View style={styles.modal_wrap}>
+                    <View style={styles.close_wrap}>
+                        <TouchableOpacity style={styles.modal_close} onPress={() => {
+                            this.setModalVisible_Protocol(false)
+                        }}>
+                            <Image style={styles.modal_close_img} source={require('../../assets/login/close.png')} />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.modal_content}>
+                        <Text style={{ color: '#f00', padding: 10, }}>《装甲兵用户协议》</Text>
+                        <Text style={{ padding: 10, }}>一般来说，使用Chocolatey来安装软件的时候，需要以管理员的身份来运行命令提示符窗口。译注：chocolatey的网站可能在国内访问困难，导致上述安装命令无法正常完成。请使用稳定的翻墙工具。 如果你实在装不上这个工具，也不要紧。下面所需的python2和nodejs你可以分别单独去对应的官方网站下载安装即可。</Text>
+                        <TouchableOpacity style={styles.modal_sure_wrap} onPress={() => {
+                            this.setModalVisible_Protocol(false)
+                        }}>
+                            <Text style={{ color: '#fff' }}>确定</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
+        )
     }
+
     _onToLogin = () => {
         this.pnv.navigate('login');
     }
@@ -164,11 +174,21 @@ class RegisterScreen extends Component {
     _ongetIdentifyingCode = () => {
         //获取验证码
     }
-    _onSelectID = () => {
-        this.ActionSheet.show();
+    _openTypes = () => {
+        this.setState({ modalVisible_types: true });
+    }
+    setModalVisible_types(tag) {
+        this.setState({ modalVisible_types: tag });
     }
     _openProtocol = () => {
-        this.setState({ modalVisible: true });
+        this.setState({ modalVisible_protocol: true });
+    }
+    setModalVisible_Protocol(visible) {
+        this.setState({ modalVisible_protocol: visible });
+    }
+
+    _onRegister = () => {
+
     }
 }
 mapStoreState = (store) => ({
@@ -210,7 +230,6 @@ const styles = StyleSheet.create({
         width: 100,
         height: 30,
         padding: 0,
-
     },
     code: {
         marginLeft: 20,
@@ -227,7 +246,6 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-
     },
     xieyi: {
         width: 250,
@@ -262,14 +280,61 @@ const styles = StyleSheet.create({
     login: {
         marginTop: 10,
     },
-    modal_wrap: {
-        width: 260,
-        marginTop: 160,
+    types_wrap: {
+        flex: 1,
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+    types_box: {
+        position: 'absolute',
+        width: DevWH.sW,
+        height: 260,
+        bottom: 0,
+        backgroundColor: '#fff',
+        paddingLeft: 15,
+        paddingRight: 15,
+    },
+    types_title_wrap: {
+        height: 40,
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderColor: '#ccc',
+        borderBottomWidth: 1,
+    },
+    types_title: {
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        //
-        borderColor: '#f00',
-        borderWidth: 1,
+    },
+    types_title_txt: {
+        color: '#333',
+        fontSize: 15 / Tools.Font(),
+    },
+    type_sure: {
+        width: 55,
+        height: 25,
+        position: 'absolute',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: Variable.Default.themeColor,
+        borderRadius: 2,
+        right: 0,
+    },
+    type_sure_txt: {
+        color: '#fff',
+        fontSize: 12 / Tools.Font(),
+
+    },
+    types_options: {
+        height: 40,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    modal_wrap: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
     modal_content: {
         width: 260,
@@ -277,23 +342,31 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderRadius: 4,
         alignItems: 'center',
-        //
-        borderColor: '#aaa',
-        borderWidth: 1,
     },
     modal_sure_wrap: {
-        flexDirection: 'row',
+        // flexDirection: 'row',
         position: 'absolute',
         bottom: 0,
-    },
-    modal_sure_btn: {
+        backgroundColor: Variable.Default.themeColor,
         flex: 1,
+        width: 260,
         height: 35,
         alignItems: 'center',
         justifyContent: 'center',
+        borderRadius: 4,
     },
-    modal_close:{
-        width:24,
-        height:24,
+    close_wrap: {
+        width: 260,
+        height: 35,
     },
+    modal_close: {
+        // width: 24,
+        // height: 24,
+        position: 'absolute',
+        right: 0,
+    },
+    modal_close_img: {
+        width: 24,
+        height: 24,
+    }
 })
