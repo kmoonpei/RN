@@ -35,6 +35,7 @@ class ResetpwdScreen extends Component {
                         style={styles.txt_input}
                         underlineColorAndroid="transparent"
                         placeholder={'请输入您的新密码'}
+                        placeholderTextColor="#aaa"
                         keyboardType={'phone-pad'}
                         onChangeText={(text) => this.setState({ phone: parseInt(text) })}
                     />
@@ -46,10 +47,11 @@ class ResetpwdScreen extends Component {
                         style={styles.txt_input}
                         underlineColorAndroid="transparent"
                         placeholder={'请再次输入您的新密码'}
+                        placeholderTextColor="#aaa"
                         onChangeText={(text) => this.setState({ pwd: parseInt(text) })}
                     />
                 </View>
-                <TouchableOpacity onPress={this._onNext}>
+                <TouchableOpacity style={{ flexDirection: 'row' }} onPress={this._onNext}>
                     <View style={[styles.next, { backgroundColor: Variable.Default.themeColor }]}>
                         <Text style={styles.txt_next}>完成</Text>
                     </View>
@@ -62,7 +64,7 @@ class ResetpwdScreen extends Component {
     _ongetIdentifyingCode = () => {
         //获取验证码
     }
-    _onNext=()=>{
+    _onNext = () => {
         this.pnv.navigate('login');
     }
 }
@@ -105,7 +107,7 @@ const styles = StyleSheet.create({
         fontSize: 12.2 / Tools.Font(),
     },
     next: {
-        width: 300,
+        flex: .7,
         height: 40,
         borderRadius: 5,
         alignItems: 'center',

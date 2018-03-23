@@ -30,10 +30,9 @@ class CircleScreen extends Component {
                 <StatusBar
                     barStyle='light-content'
                     backgroundColor={this.theme.themeColor} />
-                <Text> 圈子 </Text>
                 <Button
                     style={styles.btn}
-                    title='go to details page'
+                    title='登录'
                     onPress={this._goToDetails} />
             </View >
         )

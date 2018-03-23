@@ -30,37 +30,43 @@ class LoginScreen extends Component {
             <View style={styles.bg}>
                 <Image style={[styles.bg_img]} source={require('../../assets/login/bg.png')} />
                 <Image style={styles.logo} source={require('../../assets/login/logo.png')} />
-                <View style={styles.txt_input_wrap}>
-                    <Image style={styles.left_icon} source={require('../../assets/login/phone.png')} />
-                    <TextInput
-                        style={styles.txt_input}
-                        underlineColorAndroid="transparent"
-                        maxLength={11}
-                        placeholder={'请输入手机号码'}
-                        keyboardType={'phone-pad'}
-                        onChangeText={(text) => this.setState({ phone: parseInt(text) })}
-                    />
+                <View style={{ flexDirection: 'row' }}>
+                    <View style={styles.txt_input_wrap}>
+                        <Image style={styles.left_icon} source={require('../../assets/login/phone.png')} />
+                        <TextInput
+                            style={styles.txt_input}
+                            underlineColorAndroid="transparent"
+                            maxLength={11}
+                            placeholder={'请输入手机号码'}
+                            placeholderTextColor="#aaa"
+                            keyboardType={'phone-pad'}
+                            onChangeText={(text) => this.setState({ phone: parseInt(text) })}
+                        />
+                    </View>
                 </View>
-                <View style={styles.txt_input_wrap}>
-                    <Image style={styles.left_icon} source={require('../../assets/login/pwd.png')} />
-                    <TextInput
-                        style={styles.txt_input}
-                        underlineColorAndroid="transparent"
-                        placeholder={'请输入您的密码'}
-                        onChangeText={(text) => this.setState({ pwd: parseInt(text) })}
-                    />
+                <View style={{ flexDirection: 'row' }}>
+                    <View style={styles.txt_input_wrap}>
+                        <Image style={styles.left_icon} source={require('../../assets/login/pwd.png')} />
+                        <TextInput
+                            style={styles.txt_input}
+                            underlineColorAndroid="transparent"
+                            placeholder={'请输入您的密码'}
+                            placeholderTextColor="#aaa"
+                            onChangeText={(text) => this.setState({ pwd: parseInt(text) })}
+                        />
+                    </View>
                 </View>
-                <TouchableOpacity onPress={this._onFindpwd}>
+                <TouchableOpacity style={{ flexDirection: 'row' }} onPress={this._onFindpwd}>
                     <View style={styles.txt_forget_wrap}>
                         <Text style={styles.txt_forget_pwd}>忘记密码?</Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={this._onLogin}>
+                <TouchableOpacity style={{ flexDirection: 'row' }} onPress={this._onLogin}>
                     <View style={[styles.login, { backgroundColor: Variable.Default.themeColor }]}>
                         <Text style={styles.txt_login}>登录</Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={this._onRegister}>
+                <TouchableOpacity style={{ flexDirection: 'row' }} onPress={this._onRegister}>
                     <View style={styles.login}>
                         <Text >没有账号?马上注册</Text>
                     </View>
@@ -100,7 +106,7 @@ const styles = StyleSheet.create({
         margin: 40,
     },
     txt_input_wrap: {
-        width: 250,
+        flex: .7,
         height: 40,
         alignItems: 'center',
         flexDirection: 'row',
@@ -114,12 +120,12 @@ const styles = StyleSheet.create({
         marginRight: 20,
     },
     txt_input: {
-        width: 250,
+        width: 180,
         height: 30,
         padding: 0,
     },
     txt_forget_wrap: {
-        width: 250,
+        flex:.7,
         height: 30,
         marginTop: 10,
     },
@@ -128,7 +134,7 @@ const styles = StyleSheet.create({
         right: 0,
     },
     login: {
-        width: 250,
+        flex:.7,
         height: 40,
         borderRadius: 5,
         alignItems: 'center',
@@ -138,5 +144,5 @@ const styles = StyleSheet.create({
         fontSize: 16 / Tools.Font(),
         color: '#fff',
     },
-    
+
 })

@@ -11,6 +11,8 @@ import PublishScreen from '../pages/publish/publish';
 import NearbyScreen from '../pages/nearby/nearby'
 import MeScreen from '../pages/me/me';
 import DetailsScreen from '../pages/circle/details';
+import EditingTrendsScreen from '../pages/publish/editing.trends'
+import EditingDemandScreen from '../pages/publish/editing.demand'
 
 
 const Tabs = TabNavigator({
@@ -49,7 +51,8 @@ export const AppNavigator = StackNavigator({
     findpwd: { screen: FindpwdScreen },
     resetpwd: { screen: ResetpwdScreen },
     details: { screen: DetailsScreen },
-
+    edittrends: { screen: EditingTrendsScreen },
+    editdemand: { screen: EditingDemandScreen },
 }, {
         navigationOptions: { // 屏幕导航的默认选项, 也可以在组件内用 static navigationOptions 设置(会覆盖此处的设置)
             // 导航栏相关设置项

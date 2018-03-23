@@ -37,66 +37,82 @@ class RegisterScreen extends Component {
             <View style={styles.bg}>
                 <Image style={[styles.bg_img]} source={require('../../assets/login/bg.png')} />
                 <Image style={styles.logo} source={require('../../assets/login/logo.png')} />
-                <View style={[styles.txt_input_wrap, { marginTop: -20 }]}>
-                    <Image style={styles.left_icon} source={require('../../assets/login/phone.png')} />
-                    <TextInput
-                        style={styles.txt_input}
-                        underlineColorAndroid="transparent"
-                        maxLength={11}
-                        placeholder={'请输入您的手机号码'}
-                        keyboardType={'phone-pad'}
-                        onChangeText={(text) => this.setState({ phone: parseInt(text) })}
-                    />
+                <View style={{ flexDirection: 'row' }}>
+                    <View style={[styles.txt_input_wrap]}>
+                        <Image style={styles.left_icon} source={require('../../assets/login/phone.png')} />
+                        <TextInput
+                            style={styles.txt_input}
+                            underlineColorAndroid="transparent"
+                            maxLength={11}
+                            placeholder={'请输入您的手机号码'}
+                            placeholderTextColor="#aaa"
+                            keyboardType={'phone-pad'}
+                            onChangeText={(text) => this.setState({ phone: parseInt(text) })}
+                        />
+                    </View>
                 </View>
-                <View style={styles.txt_input_wrap}>
-                    <Image style={styles.left_icon} source={require('../../assets/login/pwd.png')} />
-                    <TextInput
-                        style={styles.txt_input}
-                        underlineColorAndroid="transparent"
-                        placeholder={'请输入您的密码'}
-                        onChangeText={(text) => this.setState({ pwd: parseInt(text) })}
-                    />
+                <View style={{ flexDirection: 'row' }}>
+                    <View style={styles.txt_input_wrap}>
+                        <Image style={styles.left_icon} source={require('../../assets/login/pwd.png')} />
+                        <TextInput
+                            style={styles.txt_input}
+                            underlineColorAndroid="transparent"
+                            placeholder={'请输入您的密码'}
+                            placeholderTextColor="#aaa"
+                            onChangeText={(text) => this.setState({ pwd: parseInt(text) })}
+                        />
+                    </View>
                 </View>
-                <View style={styles.txt_input_wrap}>
-                    <Image style={styles.left_icon} source={require('../../assets/login/verifCode.png')} />
-                    <TextInput
-                        style={styles.txt_input}
-                        underlineColorAndroid="transparent"
-                        placeholder={'请输入验证码'}
-                        onChangeText={(text) => this.setState({ pwd: parseInt(text) })}
-                    />
-                    <View style={styles.code}>
-                        <TouchableOpacity onPress={this._ongetIdentifyingCode}>
-                            <Text style={styles.txt_code}>获取验证码</Text>
+                <View style={{ flexDirection: 'row' }}>
+                    <View style={styles.txt_input_wrap}>
+                        <Image style={styles.left_icon} source={require('../../assets/login/verifCode.png')} />
+                        <TextInput
+                            style={styles.txt_input}
+                            underlineColorAndroid="transparent"
+                            placeholder={'请输入验证码'}
+                            placeholderTextColor="#aaa"
+                            onChangeText={(text) => this.setState({ pwd: parseInt(text) })}
+                        />
+                        <View style={styles.code}>
+                            <TouchableOpacity onPress={this._ongetIdentifyingCode}>
+                                <Text style={styles.txt_code}>获取验证码</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
+                <View style={{ flexDirection: 'row' }}>
+                    <View style={styles.txt_input_wrap}>
+                        <Image style={styles.left_icon} source={require('../../assets/login/identity.png')} />
+                        <TouchableOpacity style={{ flex: 1 }} onPress={this._openTypes}>
+                            <View style={styles.selected}>
+                                <Text style={{ color: this.state.type != '' ? '#222' : '#aaa' }}>{this.state.type != '' ? this.state.type : '请选择您的身份'}</Text>
+                                <Image style={styles.arrow_icon} source={require('../../assets/login/arrows_right.png')} />
+                            </View>
                         </TouchableOpacity>
                     </View>
                 </View>
-
-                <View style={styles.txt_input_wrap}>
-                    <Image style={styles.left_icon} source={require('../../assets/login/identity.png')} />
-                    <TouchableOpacity style={{ flex: 1 }} onPress={this._openTypes}>
-                        <View style={styles.selected}>
-                            <Text style={{ color: this.state.type != '' ? '#222' : '#aaa' }}>{this.state.type != '' ? this.state.type : '请选择您的身份'}</Text>
-                            <Image style={styles.arrow_icon} source={require('../../assets/login/arrows.png')} />
-                        </View>
+                <View style={{ flexDirection: 'row' }}>
+                    <View style={styles.xieyi}>
+                        <TouchableOpacity onPress={this._onAgree} >
+                            <Image style={styles.checked} source={this.state.isChecked ? require('../../assets/login/checked.png') : require('../../assets/login/unchecked.png')} />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={this._openProtocol} >
+                            <Text style={[{ color: this.state.isChecked ? Variable.Default.themeColor : '#aaa' }]}>我已同意装甲兵注册协议</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+                <View style={{ flexDirection: 'row' }}>
+                    <TouchableOpacity style={[styles.register, { backgroundColor: this.state.isChecked && this.state.type != '' ? Variable.Default.themeColor : '#aaa' }]}
+                        onPress={this._onRegister}
+                        disabled={this.state.isChecked && this.state.type != '' ? false : true}>
+                        <Text style={styles.txt_register}>注册</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.xieyi}>
-                    <TouchableOpacity onPress={this._onAgree} >
-                        <Image style={styles.checked} source={this.state.isChecked ? require('../../assets/login/checked.png') : require('../../assets/login/unchecked.png')} />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={this._openProtocol} >
-                        <Text style={[{ color: this.state.isChecked ? Variable.Default.themeColor : '#aaa' }]}>我已同意装甲兵注册协议</Text>
-                    </TouchableOpacity>
-                </View>
-                <TouchableOpacity style={[styles.register, { backgroundColor: this.state.isChecked && this.state.type != '' ? Variable.Default.themeColor : '#aaa' }]}
-                    onPress={this._onRegister}
-                    disabled={this.state.isChecked && this.state.type != '' ? false : true}>
-                    <Text style={styles.txt_register}>注册</Text>
-                </TouchableOpacity>
+                {/* <View style={{ flexDirection: 'row' }}> */}
                 <TouchableOpacity style={styles.login} onPress={this._onToLogin}>
                     <Text >已有账号?马上登录</Text>
                 </TouchableOpacity>
+                {/* </View> */}
                 {this._modalTypes()}
                 {this._modalProtocol()}
             </View>
@@ -210,9 +226,10 @@ const styles = StyleSheet.create({
         width: 60,
         height: 100,
         margin: 40,
+        marginBottom: 20,
     },
     txt_input_wrap: {
-        width: 250,
+        flex: .7,
         height: 32,
         alignItems: 'center',
         flexDirection: 'row',
@@ -250,7 +267,6 @@ const styles = StyleSheet.create({
     xieyi: {
         width: 250,
         height: 30,
-        // marginTop: 10,
         flexDirection: 'row',
         alignItems: 'center',
     },
@@ -344,7 +360,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     modal_sure_wrap: {
-        // flexDirection: 'row',
         position: 'absolute',
         bottom: 0,
         backgroundColor: Variable.Default.themeColor,
@@ -360,8 +375,6 @@ const styles = StyleSheet.create({
         height: 35,
     },
     modal_close: {
-        // width: 24,
-        // height: 24,
         position: 'absolute',
         right: 0,
     },

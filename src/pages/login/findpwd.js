@@ -36,6 +36,7 @@ class FindpwdScreen extends Component {
                         underlineColorAndroid="transparent"
                         maxLength={11}
                         placeholder={'请输入您绑定的手机号码'}
+                        placeholderTextColor="#aaa"
                         keyboardType={'phone-pad'}
                         onChangeText={(text) => this.setState({ phone: parseInt(text) })}
                     />
@@ -47,6 +48,7 @@ class FindpwdScreen extends Component {
                         style={styles.txt_input}
                         underlineColorAndroid="transparent"
                         placeholder={'请输入您收到的验证码'}
+                        placeholderTextColor="#aaa"
                         onChangeText={(text) => this.setState({ pwd: parseInt(text) })}
                     />
                     <TouchableOpacity onPress={this._ongetIdentifyingCode}>
@@ -56,7 +58,7 @@ class FindpwdScreen extends Component {
                     </TouchableOpacity>
                 </View>
 
-                <TouchableOpacity onPress={this._onNext}>
+                <TouchableOpacity style={{ flexDirection: 'row' }} onPress={this._onNext}>
                     <View style={[styles.next, { backgroundColor: Variable.Default.themeColor }]}>
                         <Text style={styles.txt_next}>下一步</Text>
                     </View>
@@ -102,7 +104,7 @@ const styles = StyleSheet.create({
         width: 180,
         height: 30,
         padding: 0,
-        flex:1,
+        flex: 1,
     },
     code: {
         marginLeft: 10,
@@ -113,7 +115,7 @@ const styles = StyleSheet.create({
         fontSize: 12.2 / Tools.Font(),
     },
     next: {
-        width: 300,
+        flex: .8,
         height: 40,
         borderRadius: 5,
         alignItems: 'center',
