@@ -4,14 +4,14 @@ import React, {
 import {
     View, Image, TouchableHighlight,
     Text, TouchableOpacity,
-    StyleSheet,
-    TextInput
+    StyleSheet, ScrollView, TextInput
 } from 'react-native'
 import { connect } from 'react-redux'
 import HeadrBar from '../../common/headerBar'
 import { Variable } from '../../variables';
 import DeviceRn from '../../components/Tools/device'
 import Tools from '../../components/Tools/tools'
+import ImgPic from '../../components/imagepicker/image.picker'
 
 let DevWH = DeviceRn().getWidHig();
 const imgs = [require('../../assets/publish/xuqiu.png'), require('../../assets/publish/dongtai.png')]
@@ -26,7 +26,7 @@ class EditingTrendsScreen extends Component {
 
         };
         this.pnv = this.props.navigation;
-
+        this.img_list = [1];
     }
     componentDidMount() {
 
@@ -38,37 +38,49 @@ class EditingTrendsScreen extends Component {
     render() {
         return (
             <View style={[styles.center]}>
-                <View style={styles.header}>
-                    <TouchableOpacity style={styles.back_wrap} onPress={() => { this._onBack() }}>
-                        <Image style={styles.back} source={require('../../assets/publish/arrows_left.png')} />
-                    </TouchableOpacity>
-                    <View style={[styles.header_txt_wrap, styles.center]}>
-                        <Text style={styles.header_txt}>发布动态</Text>
-                    </View >
-                </View>
-                <View style={[styles.content_box, styles.center]}>
-                    <View style={styles.title_wrap}><Text style={styles.title_txt1}>内容填写</Text></View>
-                    <View style={[styles.title_wrap, { borderColor: '#fff', marginTop: 0, }]}><Text style={styles.title_txt2}>请填写您要发布的动态内容</Text></View>
-                    <View style={styles.input_wrap}>
-                        <TextInput
-                            style={styles.txt_input}
-                            multiline={true}
-                            underlineColorAndroid="transparent"
-                            placeholder={'您想说的。。。'}
-                            placeholderTextColor="#888"
-                            onChangeText={(text) => this.setState({ pwd: parseInt(text) })} />
+                <ScrollView>
+                    <View style={styles.header}>
+                        <TouchableOpacity style={styles.back_wrap} onPress={() => { this._onBack() }}>
+                            <Image style={styles.back} source={require('../../assets/publish/arrows_left.png')} />
+                        </TouchableOpacity>
+                        <View style={[styles.header_txt_wrap, styles.center]}>
+                            <Text style={styles.header_txt}>发布动态</Text>
+                        </View >
                     </View>
-                </View>
-                <View style={[styles.content_box, styles.center]}>
-                    <View style={styles.title_wrap}><Text style={styles.title_txt1}>添加图片</Text></View>
-                    <View style={[styles.title_wrap, { borderColor: '#fff', orderLeftWidth: 0, marginTop: 0, }]}><Text style={styles.title_txt2}>请添加参考图片（选填）</Text></View>
-
-                </View>
-                <View style={[styles.content_box,styles.pub_wrap,styles.center]}>
-                    <TouchableOpacity style={[styles.pub,styles.center]} onPress={() => { }}>
-                        <Text style={{ color: '#fff' }}>发布</Text>
-                    </TouchableOpacity>
-                </View>
+                    <View style={[styles.content_box, styles.center]}>
+                        <View style={styles.title_wrap}><Text style={styles.title_txt1}>内容填写</Text></View>
+                        <View style={[styles.title_wrap, { borderColor: '#fff', marginTop: 0, }]}><Text style={styles.title_txt2}>请填写您要发布的动态内容</Text></View>
+                        <View style={styles.input_wrap}>
+                            <TextInput
+                                style={styles.txt_input}
+                                multiline={true}
+                                underlineColorAndroid="transparent"
+                                placeholder={'您想说的。。。'}
+                                placeholderTextColor="#888"
+                                onChangeText={(text) => this.setState({ pwd: parseInt(text) })} />
+                        </View>
+                    </View>
+                    <View style={[styles.content_box, styles.center]}>
+                        <View style={styles.title_wrap}><Text style={styles.title_txt1}>添加图片</Text></View>
+                        <View style={[styles.title_wrap, { borderColor: '#fff', borderLeftWidth: 0, marginTop: 0, }]}><Text style={styles.title_txt2}>请添加参考图片（选填）</Text></View>
+                        {/* <View style={styles.img_content}>
+                            {this.img_list.map((item, i) => {
+                                return <TouchableOpacity key={i} style={styles.img_wrap} onPress={() => { }}>
+                                    <Image style={styles.add_img} />
+                                </TouchableOpacity>
+                            })}
+                            <TouchableOpacity style={styles.add_img_wrap} onPress={() => { }}>
+                                <Image style={styles.add_img} source={require('../../assets/publish/add_new.png')} />
+                            </TouchableOpacity>
+                        </View> */}
+                        <ImgPic />
+                    </View>
+                    <View style={[styles.content_box, styles.pub_wrap, styles.center]}>
+                        <TouchableOpacity style={[styles.pub, styles.center]} onPress={() => { }}>
+                            <Text style={{ color: '#fff' }}>发布</Text>
+                        </TouchableOpacity>
+                    </View>
+                </ScrollView>
             </View >
         )
     }
@@ -139,17 +151,40 @@ const styles = StyleSheet.create({
     txt_input: {
         padding: 20,
     },
-    pub_wrap:{
-        flexDirection:'row',
-        width:DevWH.sW,
+    pub_wrap: {
+        flexDirection: 'row',
+        width: DevWH.sW,
         height: 70,
     },
-    pub:{
+    pub: {
         // width:220,
-        flex:.66,
-        height:35,
-        borderRadius:2,
-        backgroundColor:Variable.Default.themeColor,
+        flex: .66,
+        height: 35,
+        borderRadius: 2,
+        backgroundColor: Variable.Default.themeColor,
     },
-   
+    // img_content: {
+    //     width: DevWH.sW - 10,
+    //     flexDirection: 'row',
+    //     flexWrap: 'wrap',
+    //     padding: 10,
+    // },
+    // img_wrap: {
+    //     width: 80,
+    //     height: 80,
+    //     borderColor: '#aaa',
+    //     borderWidth: 1,
+    //     margin: 10,
+    //     borderRadius: 4,
+    // },
+    // add_img_wrap: {
+    //     width: 80,
+    //     height: 80,
+    //     margin: 10,
+    // },
+    // add_img: {
+    //     width: 80,
+    //     height: 80,
+    // },
+
 })

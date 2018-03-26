@@ -3722,6 +3722,10 @@ react-native-easy-toast@^1.0.9:
   dependencies:
     prop-types "^15.5.10"
 
+react-native-image-crop-picker@^0.20.0:
+  version "0.20.0"
+  resolved "http://registry.npm.taobao.org/react-native-image-crop-picker/download/react-native-image-crop-picker-0.20.0.tgz#29b8df35eb17ff7ad61524ec09832f49e552427d"
+
 react-native-progress@^3.4.0:
   version "3.4.0"
   resolved "http://registry.npm.taobao.org/react-native-progress/download/react-native-progress-3.4.0.tgz#c002e6efb2f0b82dd6889510e669c492da2718ac"
