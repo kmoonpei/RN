@@ -248,27 +248,27 @@ const styles = StyleSheet.create({
         margin: 10,
         borderRadius: 10,
     },
-    img_content: {
-        width: DevWH.sW - 10,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        padding: 10,
-    },
-    img_wrap: {
-        width: 80,
-        height: 80,
-        borderColor: '#aaa',
-        borderWidth: 1,
-        margin: 10,
-        borderRadius: 4,
-    },
-    add_img_wrap: {
-        width: 80,
-        height: 80,
-        margin: 10,
-    },
-    add_img: {
-        width: 80,
-        height: 80,
-    },
+    // img_content: {
+    //     width: DevWH.sW - 10,
+    //     flexDirection: 'row',
+    //     flexWrap: 'wrap',
+    //     padding: 10,
+    // },
+    // img_wrap: {
+    //     width: 80,
+    //     height: 80,
+    //     borderColor: '#aaa',
+    //     borderWidth: 1,
+    //     margin: 10,
+    //     borderRadius: 4,
+    // },
+    // add_img_wrap: {
+    //     width: 80,
+    //     height: 80,
+    //     margin: 10,
+    // },
+    // add_img: {
+    //     width: 80,
+    //     height: 80,
+    // },
 })
