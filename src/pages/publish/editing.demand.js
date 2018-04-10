@@ -26,6 +26,7 @@ class EditingDemandScreen extends Component {
         this.state = {
             demand_type: '设计',
             isProduct: false,
+            isEditingImg: false,
         };
         this.pnv = this.props.navigation;
         this.img_list = [1];
@@ -42,7 +43,9 @@ class EditingDemandScreen extends Component {
     _onChangeDemandType(item) {
         this.setState({ demand_type: item });
     }
-
+    _onToggle() {
+        this.setState({ isEditingImg: !this.state.isEditingImg });
+    }
     render() {
         return (
             <View style={[styles.center]}>
@@ -56,7 +59,7 @@ class EditingDemandScreen extends Component {
                 </View>
                 {/* 详尽的商品描述，更便于您的商品售卖服务 */}
                 <View style={styles.hint_wrap}><Text style={styles.hint_txt}>{this.state.isProduct ? '详尽的商品描述，更便于您的商品售卖服务' : '定制需求，让更专业的人为您服务'}</Text></View>
-                <ScrollView style={{marginBottom:40,}}>
+                <ScrollView style={{ marginBottom: 40, }}>
 
                     {!this.state.isProduct ? (<View style={[styles.content_box, styles.center, { marginTop: 0, marginBottom: 6 }]}>
                         <View style={styles.title_wrap}><Text style={styles.title_txt1}>我想要做</Text></View>
@@ -91,7 +94,10 @@ class EditingDemandScreen extends Component {
                     <View style={[styles.content_box, styles.center]}>
                         <View style={styles.title_wrap}><Text style={styles.title_txt1}>添加图片</Text></View>
                         <View style={[styles.title_wrap, { borderColor: '#fff', marginTop: 0, }]}><Text style={styles.title_txt2}>请添加参考图片（选填）</Text></View>
-                        <ImgPic />
+                        <TouchableOpacity style={styles.edit_img_wrap} onPress={() => { this._onToggle() }}>
+                            <Text >{this.state.isEditingImg == true ? '完成' : '编辑'}</Text>
+                        </TouchableOpacity>
+                        <ImgPic isEditingImg={this.state.isEditingImg} />
                     </View>
                     <View style={[styles.content_box, styles.center, { width: DevWH.sW, flexDirection: 'row', }]}>
                         <View style={[styles.title_wrap, { flex: .25, marginBottom: 10, }]}><Text style={styles.title_txt1}>联系电话</Text></View>
@@ -248,27 +254,11 @@ const styles = StyleSheet.create({
         margin: 10,
         borderRadius: 10,
     },
-    // img_content: {
-    //     width: DevWH.sW - 10,
-    //     flexDirection: 'row',
-    //     flexWrap: 'wrap',
-    //     padding: 10,
-    // },
-    // img_wrap: {
-    //     width: 80,
-    //     height: 80,
-    //     borderColor: '#aaa',
-    //     borderWidth: 1,
-    //     margin: 10,
-    //     borderRadius: 4,
-    // },
-    // add_img_wrap: {
-    //     width: 80,
-    //     height: 80,
-    //     margin: 10,
-    // },
-    // add_img: {
-    //     width: 80,
-    //     height: 80,
-    // },
+    edit_img_wrap: {
+        position: 'absolute',
+        width: 60,
+        height: 30,
+        top: 10,
+        right: 0,
+    },
 })

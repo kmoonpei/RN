@@ -156,7 +156,7 @@ class RegisterScreen extends Component {
                 animationType={"fade"}
                 transparent={true}
                 visible={this.state.modalVisible_protocol}
-                onRequestClose={() => { alert("Modal has been closed.") }}
+                onRequestClose={() => { }}
             >
                 <View style={styles.modal_wrap}>
                     <View style={styles.close_wrap}>

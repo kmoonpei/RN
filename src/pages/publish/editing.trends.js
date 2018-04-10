@@ -23,7 +23,7 @@ class EditingTrendsScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            isEditingImg: false,
         };
         this.pnv = this.props.navigation;
         this.img_list = [1];
@@ -34,19 +34,21 @@ class EditingTrendsScreen extends Component {
     _onBack() {
         this.pnv.goBack();
     }
-
+    _onToggle() {
+        this.setState({ isEditingImg: !this.state.isEditingImg });
+    }
     render() {
         return (
             <View style={[styles.center]}>
-                <ScrollView>
-                    <View style={styles.header}>
-                        <TouchableOpacity style={styles.back_wrap} onPress={() => { this._onBack() }}>
-                            <Image style={styles.back} source={require('../../assets/publish/arrows_left.png')} />
-                        </TouchableOpacity>
-                        <View style={[styles.header_txt_wrap, styles.center]}>
-                            <Text style={styles.header_txt}>发布动态</Text>
-                        </View >
-                    </View>
+                <View style={styles.header}>
+                    <TouchableOpacity style={styles.back_wrap} onPress={() => { this._onBack() }}>
+                        <Image style={styles.back} source={require('../../assets/publish/arrows_left.png')} />
+                    </TouchableOpacity>
+                    <View style={[styles.header_txt_wrap, styles.center]}>
+                        <Text style={styles.header_txt}>发布动态</Text>
+                    </View >
+                </View>
+                <ScrollView style={{marginBottom:40,}}>
                     <View style={[styles.content_box, styles.center]}>
                         <View style={styles.title_wrap}><Text style={styles.title_txt1}>内容填写</Text></View>
                         <View style={[styles.title_wrap, { borderColor: '#fff', marginTop: 0, }]}><Text style={styles.title_txt2}>请填写您要发布的动态内容</Text></View>
@@ -63,17 +65,10 @@ class EditingTrendsScreen extends Component {
                     <View style={[styles.content_box, styles.center]}>
                         <View style={styles.title_wrap}><Text style={styles.title_txt1}>添加图片</Text></View>
                         <View style={[styles.title_wrap, { borderColor: '#fff', borderLeftWidth: 0, marginTop: 0, }]}><Text style={styles.title_txt2}>请添加参考图片（选填）</Text></View>
-                        {/* <View style={styles.img_content}>
-                            {this.img_list.map((item, i) => {
-                                return <TouchableOpacity key={i} style={styles.img_wrap} onPress={() => { }}>
-                                    <Image style={styles.add_img} />
-                                </TouchableOpacity>
-                            })}
-                            <TouchableOpacity style={styles.add_img_wrap} onPress={() => { }}>
-                                <Image style={styles.add_img} source={require('../../assets/publish/add_new.png')} />
-                            </TouchableOpacity>
-                        </View> */}
-                        <ImgPic />
+                        <TouchableOpacity style={styles.edit_img_wrap} onPress={() => { this._onToggle() }}>
+                            <Text >{this.state.isEditingImg == true ? '完成' : '编辑'}</Text>
+                        </TouchableOpacity>
+                        <ImgPic isEditingImg={this.state.isEditingImg} />
                     </View>
                     <View style={[styles.content_box, styles.pub_wrap, styles.center]}>
                         <TouchableOpacity style={[styles.pub, styles.center]} onPress={() => { }}>
@@ -123,7 +118,7 @@ const styles = StyleSheet.create({
     },
     content_box: {
         backgroundColor: '#fff',
-        marginTop: 8,
+        marginTop: 6,
     },
     title_wrap: {
         width: DevWH.sW,
@@ -163,28 +158,12 @@ const styles = StyleSheet.create({
         borderRadius: 2,
         backgroundColor: Variable.Default.themeColor,
     },
-    // img_content: {
-    //     width: DevWH.sW - 10,
-    //     flexDirection: 'row',
-    //     flexWrap: 'wrap',
-    //     padding: 10,
-    // },
-    // img_wrap: {
-    //     width: 80,
-    //     height: 80,
-    //     borderColor: '#aaa',
-    //     borderWidth: 1,
-    //     margin: 10,
-    //     borderRadius: 4,
-    // },
-    // add_img_wrap: {
-    //     width: 80,
-    //     height: 80,
-    //     margin: 10,
-    // },
-    // add_img: {
-    //     width: 80,
-    //     height: 80,
-    // },
+    edit_img_wrap: {
+        position: 'absolute',
+        width: 60,
+        height: 30,
+        top: 10,
+        right: 0,
+    },
 
 })

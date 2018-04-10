@@ -13,8 +13,11 @@ import MeScreen from '../pages/me/me';
 import DetailsScreen from '../pages/circle/details';
 import EditingTrendsScreen from '../pages/publish/editing.trends'
 import EditingDemandScreen from '../pages/publish/editing.demand'
+import TrendDetails from '../pages/circle/trend.detail'
+import OthersHomePageScreen from '../pages/circle/othersHomePage'
 
-
+import OrderDetails from '../pages/user/orderDetails';//订单详情
+import UserOrder from '../pages/user/userOrder';//我的订单
 const Tabs = TabNavigator({
     circle: { screen: CircleScreen },
     publish: { screen: PublishScreen },
@@ -53,6 +56,11 @@ export const AppNavigator = StackNavigator({
     details: { screen: DetailsScreen },
     edittrends: { screen: EditingTrendsScreen },
     editdemand: { screen: EditingDemandScreen },
+    trendDtl: { screen: TrendDetails },
+    othersHP: { screen: OthersHomePageScreen },
+    
+    OrderDetails: {screen:OrderDetails},
+    UserOrder:{screen:UserOrder}
 }, {
         navigationOptions: { // 屏幕导航的默认选项, 也可以在组件内用 static navigationOptions 设置(会覆盖此处的设置)
             // 导航栏相关设置项

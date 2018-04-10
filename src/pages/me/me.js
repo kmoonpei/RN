@@ -2,7 +2,7 @@ import React, {
     Component
 } from 'react'
 import {
-    View,
+    View,Button,
     Text,
     StyleSheet
 } from 'react-native'
@@ -27,10 +27,30 @@ class MeScreen extends Component {
 
     render() {
         return (
-            <View style={{flex:1}}>
-                <Text> 个人 </Text>
+            <View style={{ flex: 1 }}>
+                <Button
+                    title='登录'
+                    onPress={this._goToDetails} />
+                <Button
+                    style={styles.btn}
+                    title='订单详情'
+                    onPress={this._goToOrderDetails} />
+                <Button
+                    style={styles.btn}
+                    title='我的订单'
+                    onPress={this._goToUserOrder} />
             </View >
         )
+    }
+
+    _goToDetails = () => {
+        this.pnv.navigate('login');
+    }
+    _goToOrderDetails = () =>{
+        this.pnv.navigate('OrderDetails')
+    }
+    _goToUserOrder = () =>{
+        this.pnv.navigate('UserOrder')
     }
 }
 
